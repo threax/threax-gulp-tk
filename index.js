@@ -32,6 +32,18 @@ function minifyJs(settings) {
 };
 exports.minifyJs = minifyJs;
 
+function minifyEachJs(settings) {
+    gulp.src(settings.libs, { base: settings.base })
+        .pipe(sourcemaps.init())
+        .pipe(uglify())
+        .pipe(rename(function (path) {
+            path.extname = ".min.js";
+        }))
+        .pipe(sourcemaps.write(".", { includeContent: false, sourceRoot: settings.sourceRoot }))
+        .pipe(gulp.dest(settings.dest));
+};
+exports.minifyEachJs = minifyEachJs;
+
 function concatJs(settings) {
     return gulp.src(settings.libs, { base: settings.base })
         .pipe(sourcemaps.init())
