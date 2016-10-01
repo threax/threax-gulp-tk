@@ -1,10 +1,13 @@
 {
-  "name": "gulp-build-shortcuts",
-  "version": "1.1.0",
+  "name": "threax-gulp-tk",
+  "version": "1.0.0",
   "author": "Andrew Piper",
   "private": false,
   "files": [
-    "index.js"
+    "copy.js",
+    "javascript.js",
+    "less.js",
+    "typescript.js"
   ],
   "dependencies": {
 
@@ -18,6 +21,8 @@
     "gulp-less": "~3.1.0",
     "gulp-uglifycss": "~1.0.6",
     "gulp-util": "~3.0.7",
-    "gulp-plumber": "~1.1.0"
+    "gulp-plumber": "~1.1.0",
+    "gulp-typedoc": "^2.0.0",
+    "jsns": "^1.2.0"
   }
 }
