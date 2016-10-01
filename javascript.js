@@ -4,14 +4,27 @@
     rename = require("gulp-rename"),
     sourcemaps = require("gulp-sourcemaps");
 
-//Minification
-function minifyConcat(settings) {
-    minifyJs(settings);
-    concatJs(settings);
-}
-exports.minifyConcat = minifyConcat;
+var copy = require('./copy.js');
 
-function minifyJs(settings) {
+//Minification
+function compileJavascript(settings) {
+    if (settings.minify && settings.concat) {
+        minifyConcatJs(settings);
+        concatJs(settings);
+    }
+    else if (settings.minify) {
+        minifyEachJs(settings);
+    }
+    else if (settings.concat) {
+        concatJs(settings);
+    }
+    else {
+        copy(settings);
+    }
+}
+module.exports = compileJavascript;
+
+function minifyConcatJs(settings) {
     return gulp.src(settings.libs, { base: settings.base })
         .pipe(sourcemaps.init())
         .pipe(concat(settings.output + '.js'))
@@ -20,7 +33,6 @@ function minifyJs(settings) {
         .pipe(sourcemaps.write(".", { includeContent: false, sourceRoot: settings.sourceRoot }))
         .pipe(gulp.dest(settings.dest));
 };
-exports.minifyJs = minifyJs;
 
 function minifyEachJs(settings) {
     gulp.src(settings.libs, { base: settings.base })
@@ -32,7 +44,6 @@ function minifyEachJs(settings) {
         .pipe(sourcemaps.write(".", { includeContent: false, sourceRoot: settings.sourceRoot }))
         .pipe(gulp.dest(settings.dest));
 };
-exports.minifyEachJs = minifyEachJs;
 
 function concatJs(settings) {
     return gulp.src(settings.libs, { base: settings.base })
@@ -41,4 +52,3 @@ function concatJs(settings) {
         .pipe(sourcemaps.write(".", { includeContent: false, sourceRoot: settings.sourceRoot }))
         .pipe(gulp.dest(settings.dest));
 };
-exports.concatJs = concatJs;
