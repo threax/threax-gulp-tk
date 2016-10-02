@@ -9,17 +9,16 @@ var wrapUmd = require('jsns/umd-wrapper.js');
 //Minification
 function compileJavascript(settings) {
     if (settings.minify && settings.concat) {
-        minifyConcatJs(settings);
-        concatJs(settings);
+        return minifyConcatJs(settings);
     }
     else if (settings.minify) {
-        minifyEachJs(settings);
+        return minifyEachJs(settings);
     }
     else if (settings.concat) {
-        concatJs(settings);
+        return concatJs(settings);
     }
     else {
-        copyEachJs(settings);
+        return copyEachJs(settings);
     }
 }
 module.exports = compileJavascript;
@@ -36,7 +35,7 @@ function minifyConcatJs(settings) {
 };
 
 function minifyEachJs(settings) {
-    gulp.src(settings.libs, { base: settings.base })
+    return gulp.src(settings.libs, { base: settings.base })
         .pipe(sourcemaps.init())
         .pipe(wrapUmd(settings))
         .pipe(uglify())
@@ -57,7 +56,7 @@ function concatJs(settings) {
 };
 
 function copyEachJs(settings) {
-    gulp.src(settings.libs, { base: settings.base })
+    return gulp.src(settings.libs, { base: settings.base })
         .pipe(sourcemaps.init())
         .pipe(wrapUmd(settings))
         .pipe(sourcemaps.write(".", { includeContent: false, sourceRoot: settings.sourceRoot }))

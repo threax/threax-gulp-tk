@@ -9,17 +9,16 @@ var copy = require('./copy.js');
 //Minification
 function compileJavascript(settings) {
     if (settings.minify && settings.concat) {
-        minifyConcatJs(settings);
-        concatJs(settings);
+        return minifyConcatJs(settings);
     }
     else if (settings.minify) {
-        minifyEachJs(settings);
+        return minifyEachJs(settings);
     }
     else if (settings.concat) {
-        concatJs(settings);
+        return concatJs(settings);
     }
     else {
-        copy(settings);
+        return copy(settings);
     }
 }
 module.exports = compileJavascript;
@@ -35,7 +34,7 @@ function minifyConcatJs(settings) {
 };
 
 function minifyEachJs(settings) {
-    gulp.src(settings.libs, { base: settings.base })
+    return gulp.src(settings.libs, { base: settings.base })
         .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(rename(function (path) {
