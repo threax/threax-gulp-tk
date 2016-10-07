@@ -8,6 +8,11 @@ var jsnsAmdWrapper = require('jsns/amd-wrapper.js');
 
 function compileJsnsTs(settings) {
 
+    var output = settings.output;
+    if (!settings.suppressAutoExtension && output && !output.endsWith('.js')) {
+        output += '.js';
+    }
+
     var piped = gulp.src(settings.libs, { base: settings.base })
         .pipe(sourcemaps.init())
         .pipe(ts({
@@ -19,11 +24,14 @@ function compileJsnsTs(settings) {
         .pipe(jsnsAmdWrapper(settings));
 
     if (settings.concat === true) {
-        piped = piped.pipe(concat(settings.output + '.js'))
-            .pipe(rename(settings.output + '.min.js'));
+        piped = piped.pipe(concat(output))
+            .pipe(rename(output));
     }
 
-    //.pipe(uglify())
+    if (settings.minify === true) {
+        piped = piped.pipe(uglify())
+    }
+
     piped = piped
         .pipe(sourcemaps.write(".", { includeContent: false, sourceRoot: settings.sourceRoot }))
         .pipe(gulp.dest(settings.dest));
