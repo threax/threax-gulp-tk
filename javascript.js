@@ -28,7 +28,6 @@ function minifyConcatJs(settings) {
         .pipe(sourcemaps.init())
         .pipe(concat(settings.output + '.js'))
         .pipe(uglify())
-        .pipe(rename(settings.output + '.min.js'))
         .pipe(sourcemaps.write(".", { includeContent: false, sourceRoot: settings.sourceRoot }))
         .pipe(gulp.dest(settings.dest));
 };
