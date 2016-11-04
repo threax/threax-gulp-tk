@@ -1,6 +1,6 @@
 {
   "name": "threax-gulp-tk",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "author": "Andrew Piper",
   "private": false,
   "files": [
@@ -23,7 +23,8 @@
     "gulp-typedoc": "^2.0.0",
     "jsns": "^2.0.0",
     "gulp-typescript": "^3.0.1",
-    "typescript": "^2.0.3"
+    "typescript": "^2.0.3",
+    "typedoc":"^0.3.9"
   },
   "devDependencies": {
     
