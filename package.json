@@ -1,6 +1,6 @@
 {
   "name": "threax-gulp-tk",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "author": "Andrew Piper",
   "private": false,
   "files": [
@@ -23,7 +23,8 @@
     "jsns": "^2.0.0",
     "gulp-typescript": "^3.0.1",
     "typescript": "^2.0.3",
-    "gulp-convert-encoding":"~1.0.0"
+    "gulp-convert-encoding":"~1.0.0",
+    "event-stream": "^3.3.4"
   },
   "devDependencies": {
     
