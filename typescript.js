@@ -19,7 +19,8 @@ function compileJsnsTs(settings) {
             noImplicitAny: false,
             allowJs: true,
             isolatedModules: true,
-            module: 'amd'
+            module: 'amd',
+            importHelpers: true
         }))
         .pipe(jsnsAmdWrapper(settings));
 
